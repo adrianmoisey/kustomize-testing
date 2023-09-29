@@ -4,20 +4,20 @@ metadata:
   name: test
 spec:
   selector:
-  matchLabels:
-    app: test
-  template:
-  metadata:
-    labels:
+    matchLabels:
       app: test
-  spec:
-    containers:
-    - name: app
-      image: nginx
-      ports:
-      - name: http
-        containerPort: 8080
-        protocol: TCP
-      env:
-      - name: KEY
-        value: ${VALUE}
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        env:
+        - name: KEY
+          value: ${VALUE}
