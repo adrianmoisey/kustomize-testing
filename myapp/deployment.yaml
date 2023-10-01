@@ -20,4 +20,4 @@ spec:
           protocol: TCP
         env:
         - name: KEY
-          value: $ADRIAN_TESTING
+          value: $ARGOCD_ENV_CLUSTER_NAME
