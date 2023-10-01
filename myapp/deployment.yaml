@@ -20,4 +20,4 @@ spec:
           protocol: TCP
         env:
         - name: KEY
-          value: ${VALUE}
+          value: $ADRIAN_TESTING
