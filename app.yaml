@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo
+spec:
+  syncPolicy:
+    syncOptions:
+    - Prune=true
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    repoURL: https://github.com/adrianmoisey/kustomize-testing.git
+    targetRevision: HEAD
+    path: myapp
+    plugin:
+      name: my-plugin-v1.0
+      env:
+        - name: CLUSTER_NAME
+          value: test-cluster
+operation:
+  sync:
+    syncStrategy:
+      hook: {}

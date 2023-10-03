@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-plugin-config
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: my-plugin
+    spec:
+      version: v1.0
+      init:
+        command: [sh]
+        args: [-c, 'pwd']
+      # This is where envsubst and helm template goes
+      generate:
+        command: [sh, -c]
+        args: ['substitute.sh']

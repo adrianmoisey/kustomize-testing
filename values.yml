@@ -1,0 +1,27 @@
+repoServer:
+  volumes:
+  - configMap:
+      name: my-plugin-config
+    name: my-plugin-config
+  - emptyDir: {}
+    name: cmp-tmp
+  extraContainers:
+  - name: my-plugin
+    command: [/var/run/argocd/argocd-cmp-server]
+    image: adrianmoisey/argogo-plugin-test:v2
+    env:
+      - name: ADRIAN_TESTING
+        value: adrian
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 999
+    volumeMounts:
+      - mountPath: /var/run/argocd
+        name: var-files
+      - mountPath: /home/argocd/cmp-server/plugins
+        name: plugins
+      - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+        subPath: plugin.yaml
+        name: my-plugin-config
+      - mountPath: /tmp
+        name: cmp-tmp
